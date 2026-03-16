@@ -18,72 +18,61 @@ int main() {
             Tabuleiro[i][j] = 0;
         }
     }
+ // 1. QUADRADO (posição: canto superior esquerdo)
+    // Usando valor 1 para representar o quadrado
+    for (int i = 1; i <= 3; i++) {
+        for (int j = 1; j <= 3; j++) {
+            Tabuleiro[i][j] = 4; // Quadrado 3x3
+        }
+    }
+
+    // 2. CRUZ (posição: canto superior direito)
+    // Usando valor 2 para representar a cruz
+    int centro_linha = 2;
+    int centro_coluna = 7;
     
-    // Variável que armazena a linha do barco horizontal
-    int barco_horizontal_linha = 3;
-    // Variável que armazena a coluna inicial do barco horizontal
-    int coluna_inicio_h = 2;
-    
-    // Loop que coloca o barco horizontal (tamanho 3) nas colunas 2, 3, 4
-    for (int j = coluna_inicio_h; j < coluna_inicio_h + 3; j++) {
-        // Verifica se a posição está dentro dos limites do tabuleiro
-        if (barco_horizontal_linha < LINHA && j < COLUNA) {
-            // Marca a posição com 3 (representa barco)
-            Tabuleiro[barco_horizontal_linha][j] = 3;
+    // Linha horizontal da cruz
+    for (int j = centro_coluna - 2; j <= centro_coluna + 2; j++) {
+        if (j >= 0 && j < COLUNA) {
+            Tabuleiro[centro_linha][j] = 7;
         }
     }
     
-    // Variável que armazena a coluna do barco vertical
-    int barco_vertical_coluna = 5;
-    // Variável que armazena a linha inicial do barco vertical
-    int linha_inicio_v = 4;
-    
-    // Loop que coloca o barco vertical (tamanho 3) nas linhas 4, 5, 6
-    for (int i = linha_inicio_v; i < linha_inicio_v + 3; i++) {
-        // Verifica se a posição está dentro dos limites do tabuleiro
-        if (i < LINHA && barco_vertical_coluna < COLUNA) {
-            // Marca a posição com 3 (representa barco)
-            Tabuleiro[i][barco_vertical_coluna] = 3;
+    // Linha vertical da cruz
+    for (int i = centro_linha - 2; i <= centro_linha + 2; i++) {
+        if (i >= 0 && i < LINHA) {
+            Tabuleiro[i][centro_coluna] = 7;
         }
     }
+
+    // 3. TRIÂNGULO (posição: centro esquerdo)
+    // Usando valor 3 para representar o triângulo
+    int triangulo_linha_base = 8;
+    int triangulo_coluna_inicio = 1;
     
-    // Variável que armazena a linha inicial do barco diagonal
-    int linha_inicio_d = 6;
-    // Variável que armazena a coluna inicial do barco diagonal
-    int coluna_inicio_d = 1;
+    for (int i = 0; i < 4; i++) {
+        for (int j = triangulo_coluna_inicio; j <= triangulo_coluna_inicio + i; j++) {
+            if (triangulo_linha_base - i >= 0 && j < COLUNA) {
+                Tabuleiro[triangulo_linha_base - i][j] = 3;
+            }
+        }
+    }
+
+    // 4. X (posição: canto inferior direito)
+    // Usando valor 4 para representar o X
+    int x_linha_inicio = 6;
+    int x_coluna_inicio = 6;
     
-    // Loop que coloca o barco diagonal (tamanho 3)
-    for (int i = 0; i < 3; i++) {
-        // Calcula a linha atual incrementando a partir da linha inicial
-        int linha_atual = linha_inicio_d + i;
-        // Calcula a coluna atual incrementando a partir da coluna inicial
-        int coluna_atual = coluna_inicio_d + i;
+    for (int i = 0; i < 4; i++) {
+        // Diagonal principal do X
+        if (x_linha_inicio + i < LINHA && x_coluna_inicio + i < COLUNA) {
+            Tabuleiro[x_linha_inicio + i][x_coluna_inicio + i] = 6;
+        }
         
-        // Verifica se a posição está dentro dos limites do tabuleiro
-        if (linha_atual < LINHA && coluna_atual < COLUNA) {
-            // Marca a posição com 3 (representa barco)
-            Tabuleiro[linha_atual][coluna_atual] = 3;
+        // Diagonal secundária do X
+        if (x_linha_inicio + i < LINHA && x_coluna_inicio + 3 - i < COLUNA) {
+            Tabuleiro[x_linha_inicio + i][x_coluna_inicio + 3 - i] = 6;
         }
-    }
-   
-   
-        // Variável que armazena a linha inicial do barco diagonal inversa
-        int linha_inicio_d2 = 6;
-        // Variável que armazena a coluna inicial do barco diagonal inversa
-        int coluna_inicio_d2 = 8;
-    
-        // Loop que coloca o barco diagonal inversa (tamanho 3)
-    for (int i = 0; i < 3; i++) {
-        // Calcula a linha atual incrementando a partir da linha inicial
-        int linha_atual_d = linha_inicio_d2 + i;
-        // Calcula a coluna atual decrementando a partir da coluna inicial
-        int coluna_atual_d = coluna_inicio_d2 - i;
-    // Verifica se a posição está dentro dos limites do tabuleiro
-        if (linha_atual_d < LINHA && coluna_atual_d >= 0) {
-            // Marca a posição com 3 (representa barco)
-            Tabuleiro[linha_atual_d][coluna_atual_d] = 3;
-        }        
-    
     }
     
     // Imprime o cabeçalho com as dimensões do tabuleiro
